@@ -63,3 +63,34 @@ gender <- c("男性", "男性", "女性", "男性", "女性", "男性")
 ?factor
 #Find the argument for setting the labels
 ```
+
+```{r}
+mat1 <- matrix(
+
+
+  
+            
+  data = 1:6,
+
+
+  
+            
+  nrow = 2,
+
+
+  
+            
+  byrow = TRUE
+
+
+  
+            
+)
+b <- c("1", "2", "3", "4", "5")
+c <- b[1]
+sapply(2:length(b), function(x){
+  c <<- paste0(c, b[x])
+  return(0)
+})
+```
+

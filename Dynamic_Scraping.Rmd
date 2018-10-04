@@ -1,0 +1,41 @@
+---
+title: "WebScraping"
+author: "Gary Liu"
+date: "2018/10/4"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r library}
+pk <- c("rvest", "RSelenium", "stringr", "magrittr", "dplyr", "readr")
+lapply(pk, library, character.only = T)
+
+
+```
+
+```{r}
+# runs a chrome browser, wait for necessary files to download
+rD <- rsDriver() 
+remDr <- rD$client
+#no need for remDr$open() browser should already be open
+remDr$navigate("http://rdc28.cwb.gov.tw/TDB/ntdb/pageControl/ty_warning?list=all")
+#table <- remDr$findElement(using = "xpath", '//*[@id="content2"]/div[2]/table')
+table <- remDr$getPageSource()[[1]] %>% 
+  read_html() %>% 
+  html_table(header = T, fill = T) %>%
+  .[[1]]
+names(table) <- table[1,]
+table <- table[-1,]
+table %<>%
+  mutate(發布警報時間 = str_sub(警報期間, end = 16)) %>%
+  mutate(解除警報時間 = str_sub(警報期間, 17)) %>%
+    subset(select = -c(年份, 編號, 侵臺路徑分類, 警報期間)) 
+
+#write_csv(table, path = "TyphoonData.csv")
+```
+
+
+
