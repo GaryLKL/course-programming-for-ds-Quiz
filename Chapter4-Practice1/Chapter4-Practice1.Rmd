@@ -14,7 +14,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ### Question 1 
 
-```{r quiz1}
+```{r Prac1Quiz1}
 quiz(
   question("If you type c(2L, 'a', 3.0, 4), how will the data type of \"2L\" be changed?",
     answer("From an integer to a character", correct = TRUE),
@@ -27,6 +27,15 @@ quiz(
 )
 ```
 
+解答：  
+在Console中，輸入：c(2L, 'a', 3.0, 4)，  
+輸出結果：[1] "2" "a" "3" "4"  
+由於向量中，存在'a'的資料型態（data type）為character，  
+可以看到輸出結果的每個元素都被雙引號包覆著，  
+代表所有元素的資料型態都被設定為character，  
+原本2L為integer，但在此向量的輸出結果為character。  
+
+
 ---
 
 ### Question 2
@@ -35,14 +44,18 @@ On line 3, show the first 10 rows of student.
 \
 \
 *(If you cannot figure it out, please click "hint".)*
-```{r quiz2, exercise=TRUE, exercise.lines = 5, exercise.eval=TRUE}
+```{r Prac1Quiz2, exercise=TRUE, exercise.lines = 5, exercise.eval=TRUE, message = F}
 library(readr)
 student <- read_csv("https://raw.githubusercontent.com/tpemartin/course-107-1-programming-for-data-science/master/data/student.csv")
 
 ```
-```{r quiz2-hint}
+```{r Prac1Quiz2-hint-1}
 ?head()
 #Find the argument for setting the number of rows
+```
+
+```{r Prac1Quiz2-hint-2}
+head(student, n = 10)
 ```
 
 ---
@@ -55,42 +68,79 @@ Now, finish the following requirement in only one step. \
 \
 \
 *(If you cannot figure it out, please click "hint".)*
-```{r quiz3, exercise=TRUE, exercise.lines = 5}
+```{r Prac1Quiz3, exercise=TRUE, exercise.lines = 5}
 gender <- c("男性", "男性", "女性", "男性", "女性", "男性")
 ```
 
-```{r quiz3-hint}
+```{r Prac1Quiz3-hint-1}
 ?factor
 #Find the argument for setting the labels
 ```
 
-```{r}
-mat1 <- matrix(
-
-
-  
-            
-  data = 1:6,
-
-
-  
-            
-  nrow = 2,
-
-
-  
-            
-  byrow = TRUE
-
-
-  
-            
-)
-b <- c("1", "2", "3", "4", "5")
-c <- b[1]
-sapply(2:length(b), function(x){
-  c <<- paste0(c, b[x])
-  return(0)
-})
+```{r Prac1Quiz3-hint-2}
+gender <- factor(x = gender, levels = c("男性", "女性"), labels = c("Male", "Female"))
 ```
 
+---
+
+## Practice 2 
+下方資料來自：[颱風資料庫](http://rdc28.cwb.gov.tw/TDB/ntdb/pageControl/typhoon)  
+
+### Question 1
+\
+**請問哪一個月發布颱風警報的頻率最高?**  
+**(變數Time為發布警報的時間)**  
+\
+步驟一：  
+請用stringr套件的str_sub函數提出前4位數字
+
+步驟二：  
+請用table函數計算各月份的颱風警報頻率
+
+```{r Prac2Quiz1, exercise = TRUE, exercise.lines = 10, exercise.eval = TRUE, message  = FALSE}
+library(readr)
+library(stringr)
+TyphoonData <- read_csv("https://raw.githubusercontent.com/GaryLKL/course-programming-for-ds-Quiz/master/TyphoonData.csv", col_types = cols(.default = col_character()))
+Time <- TyphoonData$發布警報時間
+```
+
+```{r Prac2Quiz1-hint}
+library(stringr)
+a <- c("1958-07-13 12:00", "1958-07-05 00:00", "1959-09-11 09:00")
+b <- str_sub(a, start = 6, end = 7)
+table(b)
+```
+
+
+---
+
+### Question 2
+**承上題，將Time的西元年轉變為民國年**  
+**(參考電子書4.7章節)**  
+步驟一：  
+使用lubridate套件的ymd_hm函數，將Time轉成時間格式(POSIXct)  
+步驟二：  
+使用years函數，減去1911年
+```{r Prac2Quiz2, exercise = TRUE, exercise.lines = 10, exercise.eval = TRUE, message = FALSE}
+library(readr)
+library(stringr)
+library(lubridate)
+TyphoonData <- read_csv("https://raw.githubusercontent.com/GaryLKL/course-programming-for-ds-Quiz/master/TyphoonData.csv", col_types = cols(.default = col_character()))
+Time <- TyphoonData$發布警報時間
+
+
+```
+
+```{r Prac2Quiz2-hint}
+ymd_hm("1958-07-13 12:00") - years(1911)
+```
+
+---
+
+```{r Prac2Quiz3}
+
+```
+
+```{r Prac2Quiz3-hint}
+
+```
