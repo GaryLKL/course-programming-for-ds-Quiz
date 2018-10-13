@@ -12,7 +12,9 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ## Practice 1
 
-### Question 1 
+---
+
+> Question 1 
 
 ```{r Prac1Quiz1}
 quiz(
@@ -38,7 +40,7 @@ quiz(
 
 ---
 
-### Question 2
+> Question 2
 
 On line 3, show the first 10 rows of student. 
 \
@@ -60,7 +62,7 @@ head(student, n = 10)
 
 ---
 
-### Question 3
+> Question 3
 
 Now, finish the following requirement in only one step. \
 1. Set gender as a factor. \
@@ -87,15 +89,16 @@ gender <- factor(x = gender, levels = c("男性", "女性"), labels = c("Male", 
 
 *資料來源：[颱風資料庫](http://rdc28.cwb.gov.tw/TDB/ntdb/pageControl/typhoon)  *
 
-### Question 1
+> Question 1
 
 **請將西元年(Year)轉成民國年份**  
 **(舉例：2018 -> 107)**
 
 步驟一：  
-目前Year的資料型態為character，請利用as.integer函數將其轉變成integer型態，才能去做數學運算  
+目前Year的資料型態為character，請利用as.integer函數將其轉變成integer型態，才能去做數學運算    
+
 步驟二：  
-減去1911
+減去1911  
 
 ```{r Prac2Quiz1, exercise = TRUE, exercise.lines = 10, exercise.eval = TRUE, message = FALSE}
 library(readr)
@@ -116,7 +119,7 @@ Year <- Year - 1911
 
 ---
 
-### Question 2
+> Question 2
 
 **承上題，假設你已經將Year轉成民國年份。**  
 **請先將Year的資料型態轉變回character，並在時間的前後加上『民國』、『年』**  
@@ -124,7 +127,8 @@ Year <- Year - 1911
 
 步驟一：  
 使用as.character函數，將Year的資料型態轉回character  
-步驟二：
+
+步驟二：  
 使用stringr套件中的str_c函數，合併『民國』、『Year』、『年』
 
 ```{r Prac2Quiz2, exercise = TRUE, exercise.lines = 10, exercise.eval = TRUE, message = FALSE}
@@ -146,7 +150,7 @@ Year <- str_c("民國", Year, "年")
 
 ---
 
-### Question 3
+> Question 3
 
 **請問哪一個月發布颱風警報的頻率最高?**  
 **(變數Time為發布警報的時間)**  
@@ -164,13 +168,22 @@ TyphoonData <- read_csv("https://raw.githubusercontent.com/GaryLKL/course-progra
 Time <- TyphoonData$發布警報時間
 ```
 
-```{r Prac2Quiz3-hint}
+```{r Prac2Quiz3-hint-1}
+#下方為提示、參考做法，並非解答。
 library(stringr)
 a <- c("1958-07-13 12:00", "1958-07-05 00:00", "1959-09-11 09:00")
 b <- str_sub(a, start = 6, end = 7)
 table(b)
 ```
 
+```{r Prac2Quiz3-hint-2}
+#解答
+library(stringr)
+Month <- str_sub(Time, 6,7)
+table(Month)
+#或直接
+table(str_sub(Time, 6,7))
+```
 
 
 

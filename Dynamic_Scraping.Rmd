@@ -32,7 +32,7 @@ table <- table[-1,]
 table %<>%
   mutate(發布警報時間 = str_sub(警報期間, end = 16)) %>%
   mutate(解除警報時間 = str_sub(警報期間, 17)) %>%
-    subset(select = -c(年份, 編號, 侵臺路徑分類, 警報期間)) 
+    subset(select = -c(編號, 侵臺路徑分類, 警報期間)) 
 
 #write_csv(table, path = "TyphoonData.csv")
 ```
