@@ -16,6 +16,7 @@ lapply(pk, library, character.only = T)
 
 ```
 
+#颱風資料
 ```{r}
 # runs a chrome browser, wait for necessary files to download
 rD <- rsDriver() 
@@ -38,4 +39,22 @@ table %<>%
 ```
 
 
+---
+
+#經濟學人
+```{r}
+url <- "https://www.economist.com/leaders/2017/05/06/the-worlds-most-valuable-resource-is-no-longer-oil-but-data"
+rD <- rsDriver() 
+remDr <- rD$client
+remDr$navigate(url)
+
+textfile <- c('')
+for(i in 1:12){
+  xp <- str_c('//*[@id="app-mount"]/div/div[2]/div[1]/main/div/div/div/article/div[1]/div[3]/p[',i, ']')
+  element <- remDr$findElement(using = "xpath", xp)
+  textfile <- str_c(textfile, element$getElementText(), '\n')
+}
+
+write(textfile, "economist_article.txt")
+```
 

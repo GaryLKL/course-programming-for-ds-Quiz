@@ -5,8 +5,8 @@ account: garylkl
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 472553
-bundleId: 1622381
+bundleId: 1640316
 url: https://garylkl.shinyapps.io/Chapter4/
-when: 1538651047.87921
+when: 1539393957.12591
 asMultiple: FALSE
 asStatic: FALSE
