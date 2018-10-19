@@ -55,6 +55,6 @@ for(i in 1:12){
   textfile <- str_c(textfile, element$getElementText(), '\n')
 }
 
-write(textfile, "economist_article.txt")
+#write(textfile, "economist_article.txt")
 ```
 

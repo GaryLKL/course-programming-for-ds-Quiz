@@ -186,4 +186,41 @@ table(str_sub(Time, 6,7))
 ```
 
 
+## Practice 3
+
+---
+
+> Question 1
+
+**目前Date為字串格式且標示方式為：年-月-日，請將Date的標示方式改成：月/日/年，並且年只顯示後兩位數字**\\
+**例如：2018-10-17 改成 10/17/18**
+
+```{r  Prac3Quiz1, exercise = TRUE, exercise.lines = 10, exercise.eval = TRUE, message  = FALSE}
+set.seed(123)
+Date <- sample(seq(as.Date('2017/01/01'), as.Date('2018/10/17'), by="day"), 20)
+
+
+
+```
+
+```{r Prac3Quiz1-hint1}
+#參考講義stringr套件中的函數
+#str_sub
+#str_split
+#str_c
+```
+
+---
+
+> Question 2
+
+**假設你簽了2年的房租合約，從2018年1月起至2019年12月，房租以「月」繳的方式，且每個月的10號前必須繳清**\\
+**請寫出一個vector，紀錄2018-01-10，2018-02-10，2018-03-10，...，2019-12-10**
+```{r}
+set.seed(123)
+payment_date <- seq(ymd("2018-01-10"), ymd("2018-12-10"), by = "month")
+```
+```{r}
+#參考講義4.5的seq()函式
+```
 
