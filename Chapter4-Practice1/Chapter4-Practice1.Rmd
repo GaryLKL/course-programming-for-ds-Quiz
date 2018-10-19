@@ -192,35 +192,57 @@ table(str_sub(Time, 6,7))
 
 > Question 1
 
-**目前Date為字串格式且標示方式為：年-月-日，請將Date的標示方式改成：月/日/年，並且年只顯示後兩位數字**\\
-**例如：2018-10-17 改成 10/17/18**
+**假設你簽了2年的房租合約，從2018年1月起至2019年12月，房租以「月」繳的方式，且每個月的10號前必須繳清。請寫出一個vector，儲存2018-01-10，2018-02-10，2018-03-10，...，2019-12-10，用以記錄每個月的繳費期限。**
 
-```{r  Prac3Quiz1, exercise = TRUE, exercise.lines = 10, exercise.eval = TRUE, message  = FALSE}
-set.seed(123)
-Date <- sample(seq(as.Date('2017/01/01'), as.Date('2018/10/17'), by="day"), 20)
-
-
-
-```
-
-```{r Prac3Quiz1-hint1}
-#參考講義stringr套件中的函數
-#str_sub
-#str_split
-#str_c
+```{r Prac3Quiz1, exercise = TRUE, exercise.lines = 5, exercise.eval = TRUE, message  = FALSE}
+#參考講義4.5的seq()函式
 ```
 
 ---
 
 > Question 2
 
-**假設你簽了2年的房租合約，從2018年1月起至2019年12月，房租以「月」繳的方式，且每個月的10號前必須繳清**\\
-**請寫出一個vector，紀錄2018-01-10，2018-02-10，2018-03-10，...，2019-12-10**
-```{r}
+**(Date為10月份中，隨機選取10天的結果。)**\
+**請使用lubridate套件中的wday()函式，來查看這10天分別是「星期幾」。**
+
+```{r Prac3Quiz2, exercise = TRUE, exercise.lines = 5, exercise.eval = TRUE, message  = FALSE}
 set.seed(123)
-payment_date <- seq(ymd("2018-01-10"), ymd("2018-12-10"), by = "month")
+Date <- sample(seq(ymd("2018-10-01"), ymd("2018-10-31"), by = 'day'), 10) 
+Date
+
 ```
-```{r}
-#參考講義4.5的seq()函式
+
+```{r Prac3Quiz2-hint-1}
+#(註)：會使用到的Arguments有：x、label
+#wday(x = , label = )
+```
+
+---
+
+> Question 3
+
+*資料來源：[行政院主計總處-統計資料查詢系統](https://win.dgbas.gov.tw/dgbas04/bc5/EarningAndProductivity/Default.aspx)*
+
+**source為工業部門每人每月薪資的年平均資料，總共有民國62年～民國106年。**\
+**1. 請使用read_csv()將source讀入Rstudio，並儲存成一個變數：salary。**\
+**2. 請使用tail()抓出最後10年。(PS. tail()的作用與head()相反。記得操作完後，要存回去salary。)**\
+**3. 請使用\'$\'，提出salary中的營造業 (hint: salary\$營造業)，並代入以下三式使用。**\
+**4. 請使用三個函式mean()、max()、min()，幫我計算這十年營造業每人每月薪資的「總平均」、「最大值」、「最小值」。**
+
+```{r Prac3Quiz3, exercise = TRUE, exercise.lines = 15, exercise.eval = TRUE, message  = FALSE}
+library(readr)
+source <- "https://raw.githubusercontent.com/GaryLKL/course-programming-for-ds-Quiz/master/AverageSalary.csv"
+
+
+
+```
+
+```{r Prac3Quiz3-hint-1}
+#salary <- read_csv(file = )
+#salary <- tail(x = salary, n = )
+#mean(salary$營造業)
+#max()
+#min()
+
 ```
 
