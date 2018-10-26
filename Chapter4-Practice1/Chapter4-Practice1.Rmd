@@ -246,3 +246,61 @@ source <- "https://raw.githubusercontent.com/GaryLKL/course-programming-for-ds-Q
 
 ```
 
+---
+
+## Practice 4
+*資料來源：[颱風資料庫](http://rdc28.cwb.gov.tw/TDB/ntdb/pageControl/typhoon)*\
+
+
+> Question 1
+
+**1. 將「近臺強度」改成factor**\
+**2. 將「最低氣壓」、「最大風速」、「7級風暴風半徑(km)」、「10級風暴風半徑(km)」改成numeric**\
+
+```{r Prac4Quiz1, exercise = TRUE, exercise.lines = 10, exercise.eval = TRUE, message  = FALSE}
+library(readr)
+TyphoonData <- read_csv("https://raw.githubusercontent.com/GaryLKL/course-programming-for-ds-Quiz/master/TyphoonData.csv")
+
+
+```
+
+```{r Prac4Quiz1-hint-1}
+#as.factor()
+#as.numeric()
+```
+
+---
+
+> Question 2
+
+**1. 參考講義5.4.4，使用which()，提出近10年 (2009~2018)的資料**\
+**2. 使用table()，計算近10年，「近臺強度」的強烈、中度、輕度出現次數各為多少？**\
+
+```{r Prac4Quiz2, exercise = TRUE, exercise.lines = 10, exercise.eval = TRUE, message  = FALSE}
+library(readr)
+TyphoonData <- read_csv("https://raw.githubusercontent.com/GaryLKL/course-programming-for-ds-Quiz/master/TyphoonData.csv")
+index1 <- which(TyphoonData$年份 >= 2009) 
+
+```
+
+```{r Prac4Quiz2-hint-1}
+#TyphoonData[index1,]
+```
+
+---
+
+> Question 3
+
+**1. 延續前題，TyphoonData$年份 %in% 2009:2018，來提出近10年的資料**\
+**2. 找出近10年且當近臺強度為中度時，最大風速的最大值為多少**\
+```{r Prac4Quiz3, exercise = TRUE, exercise.lines = 10, exercise.eval = TRUE, message  = FALSE}
+library(readr)
+TyphoonData <- read_csv("https://raw.githubusercontent.com/GaryLKL/course-programming-for-ds-Quiz/master/TyphoonData.csv")
+index2 <- TyphoonData$年份 %in% 2009:2018
+
+```
+
+```{r Prac4Quiz3-hint-1}
+#TyphoonData[index2,]
+#max() 可找出最大值
+```
