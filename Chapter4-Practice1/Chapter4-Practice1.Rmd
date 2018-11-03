@@ -309,7 +309,7 @@ index2 <- TyphoonData$年份 %in% 2009:2018
 
 ## Practice 5
 *資料來源：[IMDB](https://www.imdb.com/?ref_=nv_home)*\
-**這筆資料集來自IMDB，為2014年至2017年電影排行（根據熱門程度排名），總共蒐集了7200部電影。**
+**這筆資料集來自IMDB，為2014年至2017年電影排行（根據熱門程度排名），總共蒐集了7201部電影。**
 
 > Question 1
 
@@ -317,10 +317,9 @@ index2 <- TyphoonData$年份 %in% 2009:2018
 **2. 請用dim()、ncol()、nrow()，觀察資料集有幾個row和column**\
 **3. 請使用names()、colnames()，查看這筆資料的變數名稱**\
 **4. 請使用summary()，觀察變數「片長」的最大值、最小值、平均數、中位數**\
-```{r Prac5Quiz1, exercise = TRUE, exercise.lines = 10, exercise.eval = TRUE, message  = FALSE}
+```{r Prac5Quiz1, exercise = TRUE, exercise.lines = 15, exercise.eval = TRUE, message  = FALSE}
 library(readr)
 IMDBData <- read_csv("https://raw.githubusercontent.com/GaryLKL/course-programming-for-ds-Quiz/master/imdb_movies.csv")
-
 
 ```
 
@@ -329,12 +328,11 @@ IMDBData <- read_csv("https://raw.githubusercontent.com/GaryLKL/course-programmi
 > Question 2
 
 **1. 請幫我找出電影Ant-Man的排名、片長、類型**\
-**2. 請使用table()，查看各「年份」電影出現的次數**
-**3. 請問類型為Drama的電影中，片長最短 (提示：使用min()) 的是哪一部？**
-```{r Prac5Quiz2, exercise = TRUE, exercise.lines = 10, exercise.eval = TRUE, message  = FALSE}
+**2. 請使用table()，查看各「年份」電影出現的次數**\
+**3. 請問類型為Drama的電影中，片長最短 (提示：使用min()) 的是哪一部？**\
+```{r Prac5Quiz2, exercise = TRUE, exercise.lines = 15, exercise.eval = TRUE, message  = FALSE}
 library(readr)
 IMDBData <- read_csv("https://raw.githubusercontent.com/GaryLKL/course-programming-for-ds-Quiz/master/imdb_movies.csv")
-
 
 ```
 
@@ -347,11 +345,11 @@ IMDBData[IMDBData$片名 == "Ant-Man", c("排名","片長","類型")]
 
 > Question 3
 
-**1. 請幫我將「類型」轉成factor**
-**2. 「類型」總共有幾類呢？**
-**3. 參考電子書5.4.7，請幫我創造一個一個新的變數「片長分類」，將原變數「片長」轉成factor後，level設定為：0~90、90~120、120~150、150以上**
+**1. 請幫我將「類型」轉成factor**\
+**2. 「類型」總共有幾類呢？**\
+**3. 參考電子書5.4.7，請幫我創造一個一個新的變數「片長分類」，將原變數「片長」轉成factor後，level設定為：(0,90]、(90,120]、(120,150]、(150,500]**\
 
-```{r Prac5Quiz3, exercise = TRUE, exercise.lines = 10, exercise.eval = TRUE, message  = FALSE}
+```{r Prac5Quiz3, exercise = TRUE, exercise.lines = 15, exercise.eval = TRUE, message  = FALSE}
 library(readr)
 IMDBData <- read_csv("https://raw.githubusercontent.com/GaryLKL/course-programming-for-ds-Quiz/master/imdb_movies.csv")
 
