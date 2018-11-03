@@ -12,8 +12,9 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r library}
 pk <- c("rvest", "RSelenium", "stringr", "magrittr", "dplyr", "readr")
 lapply(pk, library, character.only = T)
-
-
+library(tictoc)
+library(purrr)
+library(naniar)
 ```
 
 #颱風資料
@@ -62,6 +63,96 @@ for(i in 1:12){
 
 IMDB
 ```{r}
+
+IMDB_Scraping <- function(i, empty){
+url <- paste0("https://www.imdb.com/search/title?title_type=feature&release_date=2014-01-01,2017-12-31&user_rating=7.0,&start=",i,"&ref_=adv_nxt")
+
+
+
+#Reading the HTML code from the website
+webpage <- read_html(url)
+
+article <- html_nodes(webpage, '.mode-advanced')
+#片名
+movie_name <- sapply(article, function(x){
+  sub <- html_text(html_nodes(x,'div.lister-item-content > h3 > a'))
+  ifelse(is.null(sub) == T,
+         "NA",
+         sub)})
+#類型
+movie_genre <- sapply(article, function(x){
+  sub <- str_extract(gsub("\n", "",html_text(html_nodes(x,'.genre'))), '^[a-zA-Z]+')
+  ifelse(is.null(sub) == T,
+         "NA",
+         sub)})
+#排名
+movie_rank <- sapply(article, function(x){
+  sub <- gsub(",", "",html_text(html_nodes(x,'.text-primary')))
+  ifelse(is.null(sub) == T,
+         "NA",
+         sub)})
+movie_rank <- as.numeric(movie_rank)
+
+#發布年份
+movie_year <- sapply(article, function(x){
+  sub <- str_extract(html_text(html_nodes(x,'span.lister-item-year.text-muted.unbold')), "[0-9]+")
+  ifelse(is.null(sub) == T,
+         "NA",
+         sub)
+  })
+#片長
+
+movie_runtime <- sapply(article, function(x){
+  sub <- gsub(" min", "",
+              html_text(html_nodes(x,'span.runtime')))
+  ifelse(is.null(sub) == T,
+         "NA",
+         sub)})
+movie_runtime <- as.numeric(movie_runtime)
+
+#評分
+#main > div > div > div.lister-list > div:nth-child(1) > div.lister-item-content > div > div.inline-block.ratings-imdb-rating > strong
+movie_score <- sapply(article, function(x){
+  sub <- html_text(html_nodes(x,'div.inline-block.ratings-imdb-rating > strong'))
+  ifelse(is.null(sub) == T,
+         "NA",
+         sub)})
+movie_score <- as.numeric(movie_score)
+#--------
+
+#Let's have another look at the genre data
+#head(genre_data)
+############################################################
+############ combine into a df
+
+
+movies_df <- data.frame(排名 = movie_rank, 片名 = movie_name,
+                     評分 = movie_score,類型 = movie_genre,
+                     片長 = movie_runtime, 年份 = movie_year, 
+                     stringsAsFactors = FALSE)
+empty <- bind_rows(empty, movies_df)
+return(empty)
+}
+
+tic()
+temp <- data.frame()
+sapply(seq(1, 6001, 50), function(i){
+  temp <<- IMDB_Scraping(i, temp)
+})
+
+toc()
+
+temp2 <- temp
+
+tic()
+sapply(seq(6051, 7201, 50), function(i){
+  temp2 <<- IMDB_Scraping(i, temp2)
+})
+
+toc()
+tail(temp2)
+#write_csv(x = temp2, path = "imdb_movies.csv")
+
 
 ```
 
