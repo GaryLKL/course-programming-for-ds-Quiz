@@ -56,14 +56,14 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 <tr>
 <td>
 
-<div id="htmlwidget-509c5657f0b13de4a277" style="width:100%;height:auto;", class = "quiz html-widget">
+<div id="htmlwidget-ca0bafb4650208281be5" style="width:100%;height:auto;", class = "quiz html-widget">
 <div class="panel panel-default">
 <div class="panel-body quizArea">
 </div>
 </div>
 </div>
 
-<script type="application/json" data-for="htmlwidget-509c5657f0b13de4a277">{"x":{"question":"If you type c(2L, &#39;a&#39;, 3.0, 4), how will the data type of &quot;2L&quot; be changed?","answers":[{"option":"From an integer to a character","correct":true,"message":null},{"option":"From a numeric to an integer","correct":false,"message":null},{"option":"From an integer to a numeric","correct":false,"message":null},{"option":"From a character to an integer","correct":false,"message":null}],"label":"Prac1Quiz1-1","skipStartButton":true,"perQuestionResponseAnswers":true,"perQuestionResponseMessaging":true,"preventUnanswered":true,"displayQuestionCount":false,"displayQuestionNumber":false,"disableRanking":true,"nextQuestionText":"","checkAnswerText":"Submit Answer","allowRetry":true,"randomSortAnswers":false,"json":{"info":{"name":"","main":""},"questions":[{"q":"If you type c(2L, &#39;a&#39;, 3.0, 4), how will the data type of &quot;2L&quot; be changed?","a":[{"option":"From an integer to a character","correct":true,"message":null},{"option":"From a numeric to an integer","correct":false,"message":null},{"option":"From an integer to a numeric","correct":false,"message":null},{"option":"From a character to an integer","correct":false,"message":null}],"correct":"Correct!","incorrect":"Incorrect! Type help(c) and read the description part carefully."}]}},"evals":[],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-ca0bafb4650208281be5">{"x":{"question":"If you type c(2L, &#39;a&#39;, 3.0, 4), how will the data type of &quot;2L&quot; be changed?","answers":[{"option":"From an integer to a character","correct":true,"message":null},{"option":"From a numeric to an integer","correct":false,"message":null},{"option":"From an integer to a numeric","correct":false,"message":null},{"option":"From a character to an integer","correct":false,"message":null}],"label":"Prac1Quiz1-1","skipStartButton":true,"perQuestionResponseAnswers":true,"perQuestionResponseMessaging":true,"preventUnanswered":true,"displayQuestionCount":false,"displayQuestionNumber":false,"disableRanking":true,"nextQuestionText":"","checkAnswerText":"Submit Answer","allowRetry":true,"randomSortAnswers":false,"json":{"info":{"name":"","main":""},"questions":[{"q":"If you type c(2L, &#39;a&#39;, 3.0, 4), how will the data type of &quot;2L&quot; be changed?","a":[{"option":"From an integer to a character","correct":true,"message":null},{"option":"From a numeric to an integer","correct":false,"message":null},{"option":"From an integer to a numeric","correct":false,"message":null},{"option":"From a character to an integer","correct":false,"message":null}],"correct":"Correct!","incorrect":"Incorrect! Type help(c) and read the description part carefully."}]}},"evals":[],"jsHooks":[]}</script>
 </td>
 </tr>
 </table>
@@ -348,7 +348,7 @@ IMDBData[IMDBData$片名 == &quot;Ant-Man&quot;, c(&quot;排名&quot;,&quot;片�
 </blockquote>
 <strong>1. 請幫我將「類型」轉成factor</strong><br />
 <strong>2. 「類型」總共有幾類呢？</strong><br />
-<strong>3. 參考電子書5.4.7，請幫我創造一個一個新的變數「片長分類」，將原變數「片長」轉成factor後，level設定為：(0,90]、(90,120]、(120,150]、(150,500]</strong><br />
+<strong>3. 參考電子書5.4.7，使用cut()，為「片長」分組，設定為：(0,90]、(90,120]、(120,150]、(150,500]，之後存成一個新的變數「片長分類」</strong><br />
 
 <div class="tutorial-exercise" data-label="Prac5Quiz3" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="15">
 <pre class="text"><code>library(readr)
