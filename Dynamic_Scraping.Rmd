@@ -165,6 +165,6 @@ files <- do.call("rbind", files)
 files$鄉鎮市區名稱 <- as.character(files$鄉鎮市區名稱)
 files$縣市名稱 <- as.character(files$縣市名稱)
 
-write.csv(files, "107年宜蘭縣行政區觀光景點人數統計_鄉鎮市區.csv")
+write.csv(files, "Yilan.csv", row.names = F)
 ```
 
