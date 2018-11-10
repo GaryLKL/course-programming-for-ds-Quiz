@@ -371,7 +371,7 @@ IMDBData %<>% mutate(
 
 ```{r Prac6Quiz1, exercise = TRUE, exercise.lines = 15, exercise.eval = TRUE, message  = FALSE}
 library(readr)
-data <- read_csv("https://raw.githubusercontent.com/GaryLKL/course-programming-for-ds-Quiz/master/107年宜蘭縣行政區觀光景點人數統計_鄉鎮市區.csv")
+data <- read_csv("https://raw.githubusercontent.com/GaryLKL/course-programming-for-ds-Quiz/master/Yilan.csv")
 
 
 
