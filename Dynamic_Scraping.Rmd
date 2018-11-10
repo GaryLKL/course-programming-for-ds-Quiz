@@ -156,3 +156,15 @@ tail(temp2)
 
 ```
 
+#practice 6 
+```{r}
+setwd("/Users/garyliu/Documents/GitHub/course-programming-for-ds-Quiz")
+all <- list.files(pattern = "107")
+files <- lapply(all, function(i) read.csv(i, fileEncoding = "Big5", skip = 1))
+files <- do.call("rbind", files)
+files$鄉鎮市區名稱 <- as.character(files$鄉鎮市區名稱)
+files$縣市名稱 <- as.character(files$縣市名稱)
+
+write.csv(files, "107年宜蘭縣行政區觀光景點人數統計_鄉鎮市區.csv")
+```
+

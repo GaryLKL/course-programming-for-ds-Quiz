@@ -363,3 +363,23 @@ IMDBData <- read_csv("https://raw.githubusercontent.com/GaryLKL/course-programmi
 IMDBData %<>% mutate(
   片長分類=cut(片長,c(0,90,120,150,Inf)))
 ```
+
+## Practice 6
+*資料來源：[社會經濟資料服務平台](https://segis.moi.gov.tw/STAT/Web/Platform/QueryInterface/STAT_QueryInterface.aspx?Type=1#)*\
+
+> Question 1
+
+```{r Prac6Quiz1, exercise = TRUE, exercise.lines = 15, exercise.eval = TRUE, message  = FALSE}
+library(readr)
+data <- read_csv("https://raw.githubusercontent.com/GaryLKL/course-programming-for-ds-Quiz/master/107年宜蘭縣行政區觀光景點人數統計_鄉鎮市區.csv")
+
+
+
+```
+
+```{r Prac5Quiz3-hint-1}
+#3.
+#150以上，可以使用 Inf ，為infinite無限大。
+IMDBData %<>% mutate(
+  片長分類=cut(片長,c(0,90,120,150,Inf)))
+```
