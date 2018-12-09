@@ -416,3 +416,18 @@ data <- read_csv("https://raw.githubusercontent.com/GaryLKL/course-programming-f
 
 
 ```
+
+```{r}
+library(magrittr)
+library(dplyr)
+library(readxl)
+student <- read_xls("../member-3.xls")
+set.seed(123)
+seat <- cbind(student[, c(1,2)], sample(1:77,77))
+colnames(seat)[3] <- '座位號碼'
+seat %>%
+  arrange(座位號碼) -> seatname
+write_excel_csv(as.data.frame(matrix(seatname$姓名[1:66], nrow = 6)), "../座位_1_66.xls")
+write_excel_csv(as.data.frame(matrix(c(seatname$姓名[67:77], "NA"), ncol = 2)), "../座位_67_77.xls")
+```
+
