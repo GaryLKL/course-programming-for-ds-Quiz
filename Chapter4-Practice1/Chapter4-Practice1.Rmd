@@ -1,5 +1,5 @@
 ---
-title: "Chapter4"
+title: "Programming for Data Science"
 output: learnr::tutorial
 runtime: shiny_prerendered
 ---
@@ -417,17 +417,84 @@ data <- read_csv("https://raw.githubusercontent.com/GaryLKL/course-programming-f
 
 ```
 
-```{r}
-library(magrittr)
+
+
+---
+
+## Practice 7
+*資料來源：[Basketball Reference](https://www.basketball-reference.com/teams/GSW/2019.html)*\
+
+**介紹：這筆資料為今年NBA金州勇士隊的統計資料。**\
+
+
+> Question 1
+
+**1. 使用summarytools::dfSummary()或summary()，初步觀察哪些欄位有遺失值，以及平均值和中位數。**\
+**2. 參考電子書6.4.2，使用dplyr::mutate()完成以下兩小題。**\
+**3. 承小題2，使用lubridate::mdy()，將`Birth Date`整理成時間格式。**\
+**4. 承小題2，將`Salary`轉成numeric格式：**\
+**先用stringr::str_sub()刪去第一個$字號，再使用readr::parse_number()，記得設定grouping_mark。**\
+
+```{r Prac7Quiz1, exercise = TRUE, exercise.lines = 15, exercise.eval = TRUE, message  = FALSE}
+library(readr)
 library(dplyr)
-library(readxl)
-student <- read_xls("../member-3.xls")
-set.seed(123)
-seat <- cbind(student[, c(1,2)], sample(1:77,77))
-colnames(seat)[3] <- '座位號碼'
-seat %>%
-  arrange(座位號碼) -> seatname
-write_excel_csv(as.data.frame(matrix(seatname$姓名[1:66], nrow = 6)), "../座位_1_66.xls")
-write_excel_csv(as.data.frame(matrix(c(seatname$姓名[67:77], "NA"), ncol = 2)), "../座位_67_77.xls")
+library(summarytools)
+library(lubridate)
+library(stringr)
+nba_data <- read_csv("https://raw.githubusercontent.com/GaryLKL/course-programming-for-ds-Quiz/master/GSW_Stat.csv")
 ```
+
+
+
+---
+
+> Question 2
+
+**1. 參考電子書6.4.3，計算變數：`Wt (體重)`、`Age (年齡)`、`GS (先發場次)` 的最小值、最大值、平均值和中位數。**\
+**2. 承上題，將min()、max()、mean()、median()包裝成一個function，並return此四個函數的結果。**\
+**PS. 課外補充：將多個輸出結果寫入一個list()，再將此list輸出，便可成功，請參考hint。**\
+**PS. 請記得設定na.rm！！！**\
+```{r Prac7Quiz2, exercise = TRUE, exercise.lines = 15, exercise.eval = TRUE, message  = FALSE}
+#請沿用Question 1的nba_data
+
+```
+
+```{r Prac7Quiz2-hint-1}
+#1. 應該參考電子書後完成
+
+#2. 包裝成function的部分比較困難，請參考以下解答
+
+stat_func <- function(x){
+  data_min = min(x, na.rm = T)
+  data_max = max(x, na.rm = T)
+  data_mean = mean(x, na.rm = T)
+  data_median = median(x, na.rm = T)
+  #首先將要輸出的變數存進一個list中（請查詢list()如何使用）
+  ls <- list(最小值 = data_min, 最大值 = data_max,
+                 平均值 = data_mean, 中位數 = data_median)
+  #再return上述的list
+  return(ls)
+}
+
+
+```
+
+---
+
+> Question 3
+
+**1. 金州勇士隊曾以大量出手三分球著名，請幫我找出場均三分球嘗試出手次數 (3-points field goal attempts per game, `3PA`) 最多的球員。**\
+**2. `3PA`大於等於2以上，且三分球命中率 (3-points field goal percentage, `3P%`) 大於等於四成以上的球員有哪些？**\
+**3. 請使用dplyr::arrange()，將nba_data的row依照場均得分 (points per game, `PTS/G`) 由大到小重新排序。**\
+**4. Question 1已將`Salary`轉成numeric。參考電子書4.4，請再將`Salary`轉成factor格式，levels範圍設定：**\
+**(0,5000000]、(5000000,10000000]、(10000000, 20000000]、(20000000, 30000000]、(30000000, 40000000]，**\
+**並存成一個新的欄位`Salary_level`。**\
+**5. 依照場均得分的排序，觀察`Salary_level`，有哪些球員是低薪高效或是高薪低效的嗎？**\
+```{r Prac7Quiz3, exercise = TRUE, exercise.lines = 20, exercise.eval = TRUE, message  = FALSE}
+#請沿用Question 1的nba_data
+
+
+```
+
+
 
