@@ -5,9 +5,9 @@ account: garylkl
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 472553
-bundleId: 1750929
+bundleId: 1763393
 url: https://garylkl.shinyapps.io/Chapter4/
-when: 1544367685.1229
+when: 1544800585.26269
 asMultiple: FALSE
 asStatic: FALSE
 ignoredFiles: AverageSalary.csv|MoreTable01.xls

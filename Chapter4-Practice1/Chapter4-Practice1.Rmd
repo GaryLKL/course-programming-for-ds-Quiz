@@ -6,7 +6,7 @@ runtime: shiny_prerendered
 
 ```{r setup, include=FALSE}
 library(learnr)
-knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(echo = FALSE, cache = TRUE)
 ```
 
 
@@ -572,7 +572,7 @@ for(i in 1:9){
 
 #### 補充：`multipler[i, j] <- `可以將結果存到matrix的第i列, 第j行的位置
 
-####  Need help? ... ?matrix()、?rep() 
+####  補充：?matrix()、?rep() 
 
 ```{r Prac8Quiz3, exercise = TRUE, exercise.lines = 15, exercise.eval = TRUE, message  = FALSE}
 
@@ -600,7 +600,7 @@ for(i in 1:9){
 ###接下來，來體驗一下如何運用`for loop`在`data.frame`之中
 #### 1. 先將`最大風速(m/s)`轉成`numeric`格式
 #### 2. 將`近臺強度`轉成factor格式
-#### 3. 參考電子書7.2.2，使用`for迴圈`，計算`近臺強度`各level的平均`最大風速(m/s)`
+#### 3. 參考電子書7.2.2，使用`for迴圈`，計算`近臺強度`各level的平均`最大風速(m/s)`，並將結果存入新變數`airpressure`
 #### 補充：記得設定`na.rm`: mean(na.rm = T)
 ```{r Prac8Quiz4, exercise = TRUE, exercise.lines = 15, exercise.eval = TRUE, message  = FALSE}
 library(readr)
@@ -635,7 +635,7 @@ for(i in 1:length(wind_level)){
 
 ####同上，完成步驟1、2
 ####利用group_by和summarise，達到上述效果
-####將結果
+
 ```{r Prac8Quiz5, exercise = TRUE, exercise.lines = 15, exercise.eval = TRUE, message  = FALSE}
 library(readr)
 library(dplyr)
@@ -653,5 +653,41 @@ TyphoonData %>%
   group_by(`近臺強度`) %>%
   summarise(平均最大風速 = mean(`最大風速(m/s)`, na.rm = T))
 
+
+```
+
+
+## Practice 9
+
+####這次三題練習題分別著重於：`for loop`、`list`、`regular expression`
+
+> Question 1
+
+####1. 請使用函式`rep()`，一次寫出5個星號`*`，並將結果存成`star`
+####2. 將`star`從原本的character vector形式轉變成一個string："*****"，提示 `paste0(..., collapse = "")` 。
+####3. 請使用`for loop`，印出下方圖示，（提示：第一行有一個\*，第二行有兩個\*，以此類推。）
+####第三小題的補充： `cat("***", sep = "\n")` 可以打印出`***`。
+####同學們可以嘗試輸入cat("Hello World!")，然後查看結果。
+
+
+```{r Prac9Quiz1, exercise = TRUE, exercise.lines = 15, exercise.eval = TRUE, message  = FALSE}
+#1
+star <- 
+
+#2
+
+#3
+```
+
+```{r Prac9Quiz1-hint-1}
+#1
+star <- rep("*", 5)
+#2
+paste0(star, collapse = "")
+
+#3
+for(i in 1:10){
+  cat(paste0(rep("*", i), collapse = ""), sep = "\n")
+}
 
 ```
