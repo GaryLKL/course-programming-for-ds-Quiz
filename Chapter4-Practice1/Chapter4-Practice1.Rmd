@@ -6,7 +6,7 @@ runtime: shiny_prerendered
 
 ```{r setup, include=FALSE}
 library(learnr)
-knitr::opts_chunk$set(echo = FALSE, cache = TRUE)
+knitr::opts_chunk$set(echo = FALSE)
 ```
 
 
@@ -663,20 +663,23 @@ TyphoonData %>%
 
 > Question 1
 
-####1. 請使用函式`rep()`，一次寫出5個星號`*`，並將結果存成`star`
+####1. 請使用函式`rep()`，一次寫出5個星號`*`，並將結果存成`star`。
 ####2. 將`star`從原本的character vector形式轉變成一個string："*****"，提示 `paste0(..., collapse = "")` 。
 ####3. 請使用`for loop`，印出下方圖示，（提示：第一行有一個\*，第二行有兩個\*，以此類推。）
-####第三小題的補充： `cat("***", sep = "\n")` 可以打印出`***`。
-####同學們可以嘗試輸入cat("Hello World!")，然後查看結果。
+####**補充**：
+####第三小題可以用`cat("***", sep = "\n")` 可以打印出`***`，其中`\n`代表換下一行。
+####**補充**：
+####同學們可以嘗試輸入`cat(c("Hello World!", "My name is xxx."), sep = "\n")`，然後查看結果，可以看出`Hello World!`和`My name is xxx.`是被換行符號分隔的，也就是跳到下一行。
+\
+![](https://raw.githubusercontent.com/GaryLKL/course-programming-for-ds-Quiz/master/star.png)
 
-
-```{r Prac9Quiz1, exercise = TRUE, exercise.lines = 15, exercise.eval = TRUE, message  = FALSE}
+```{r Prac9Quiz1, exercise = TRUE, exercise.lines = 15, exercise.eval = TRUE, message = FALSE}
 #1
-star <- 
 
 #2
 
 #3
+
 ```
 
 ```{r Prac9Quiz1-hint-1}
@@ -690,4 +693,74 @@ for(i in 1:10){
   cat(paste0(rep("*", i), collapse = ""), sep = "\n")
 }
 
+```
+
+---
+
+> Question 2
+
+####1. 請將`studentnumber`、`courses`、`midtermscores`、`examscores`包裝進一個list，並命名為`college`。
+####2. 請使用`names()`，將`college`中的上述三個元素命名為`學號`、`科目`、`期中考分數`、`小考分數`。
+####3. 輸入college[3]、college$小考分數、college[[3]]、college[3][[1]]，提出第三個元素，並比較他們的異同之處。
+####4. 請用`for loop`，幫我印出college第2~4個元素，這邊請使用`print()`來印出。
+####補充：`cat()`和`print()`有些微差距，同學們可以從下方兩篇文章了解。
+####1. [數據的讀取](https://blog.csdn.net/jianjewl/article/details/64906109)
+####2. [基本指令操作](http://kliangh.blogspot.com/2016/03/r-1.html)
+
+```{r Prac9Quiz2, exercise = TRUE, exercise.lines = 15, exercise.eval = TRUE, message  = FALSE}
+studentnumber <- c("410xxx001", "410xxx011", "410xxx031", "410xxx041")
+courses <- c("大一國文", "經濟學原理", "專業英文", "微積分")
+midtermscores <- c(80, 90, 95, 85)
+examscores <- matrix(1:16, ncol = 4)
+
+```
+
+```{r Prac9Quiz2-hint-1}
+#1
+college <- list(studentnumber, courses, midtermscores, examscores)
+#2
+names(college) <- c("學號", "科目", "期中考分數", "小考分數")
+#3
+college[3]
+college[[3]]
+college[3][[1]]
+college$小考分數
+#college[[3]]、college[3][[1]]和college$小考分數，三者的結果相同
+
+#4
+for(i in 2:4){
+  print(college[i])
+}
+
+```
+
+---
+
+> Question 3
+
+####Regular Expression練習：請參考`stringr cheat sheet`
+####1. 請使用`str_which()`，提出`fruit`中，是英文命名的水果（提示："[a-z]+" 可以提出是英文字母的字串）"。
+
+####2. 請從`vec`提出包含a而且followed by b的字串（提示："a(?=b)"）。
+####3. 請從`vec`提出有重複三個a的字串（提示："a{3}"）。
+####4. 請從`vec`提出含有連續兩個以上個a的字串（提示："a{2,}"）。
+```{r Prac9Quiz3, exercise = TRUE, exercise.lines = 15, exercise.eval = TRUE, message  = FALSE}
+library(stringr)
+#1
+fruit <- c("banana", "apple", "水梨", "西瓜", "pineapple")
+
+
+#2、3、4
+vec <- c("aabba", "cbada", "aidea", "adalw", "abab", "bbbaaa")
+```
+
+```{r Prac9Quiz3-hint-1}
+#1
+fruit[str_which(fruit, "[a-z]+")]
+#2
+vec[str_which(vec, "a(?=b)")]
+#3
+vec[str_which(vec, "a{3}")]
+#4
+vec[str_which(vec, "a{2,}")]
 ```
