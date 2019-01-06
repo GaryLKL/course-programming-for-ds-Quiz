@@ -868,3 +868,139 @@ length(unique(TyphoonData$年份))
 #3
 NestedTyphoonData$data[[2018-2010+1]]
 ```
+
+---
+
+## Practice 11
+
+*今天我們使用的練習資料是：titanic，裡面紀錄著鐵達尼號乘客的相關訊息，常被用來當作乘客存活率預測的練習範本。*
+
+
+> Question 1
+
+*鐵達尼號上總共有1309名乘客，他們被任意區分成兩個集合`titanic_train`和`titanic_test`，分別存有891位和418位乘客，
+兩個資料集合的欄位皆相同。*
+
+#### 1. `dplyr::bind_rows()`：當兩個資料集合的欄位皆相同時，可以使用該函數來合併兩資料集，請run`#1`的範例，並查看`full_test`的結果。
+#### 2. 了解`dplyr::bind_rows()`的作用後，請幫我將`titanic_train`和`titanic_test`做合併，並儲存成一個新的變數`titanic`。
+#### 3. 請使用`summarytools::dfSummary`或`summary()`來觀察`titanic`。
+#### 4. 請使用`mutate()`，幫我將`Pclass`、`Sex`、`Embarked`改成factor格式。
+#### 5. 請問船上的男女性分別有幾人？請使用`table()`來表示結果。
+```{r Prac11Quiz1, exercise = TRUE, exercise.lines = 15, exercise.eval = TRUE, message  = FALSE}
+library(dplyr)
+library(titanic) #記得先輸入install.packages("titanic")
+
+#1
+test1 <- data.frame(col1 = c(1,2,3,4), col2 = c("a", "b", "c", "d"), stringsAsFactors = F)
+test2 <- data.frame(col1 = c(5,6,7,8), col2 = c("e", "f", "g", "e"), stringsAsFactors = F)
+full_test <- bind_rows(test1, test2)
+
+#2
+
+#3
+
+#4
+
+#5
+```
+
+```{r Prac11Quiz1-hint-1}
+#2
+titanic <- bind_rows(titanic_train, titanic_test)
+#3
+titanic %>%
+  summarytools::dfSummary()
+
+#4
+titanic %>%
+  mutate(Pclass = as.factor(Pclass),
+         Sex = as.factor(Sex),
+         Embarked = as.factor(Embarked)) -> titanic
+
+#5
+table(titanic$Sex)
+```
+
+---
+
+> Question 2
+
+#### 1. 請寫一個function，用來計算某變數的遺失值數目，並將function命名為NumberofMissing。（提示`is.na()`的輸出結果為TRUE和FALSE，若該值為遺失值(NA)，會顯示為TRUE。若將is.na()的結果做加總`sum()`，便會是總遺失值數量。）
+
+#### 2. 請使用自訂的函數`MaxMinMean()`和`group_by(Sex)`，計算男生以及女生的年齡`Age`和購買的船票價`Fare`，分別有多少遺失值。
+
+#### 3. 請使用group_by(Sex, Pclass)，一併進行3-1和3-2。
+#### 3-1. `Survived`=1代表有存活；`Survived`=0代表死亡，請問男生和女生的存活下來的人數，分別佔總人數的多少比例？
+#### 3-2. 請問不同社會階級`Pclass`的存活人數，分別佔總人數`n()`的多少比例
+#### 4. `SibSp`代表該樣本的兄弟姊妹或配偶的人數（且他們同樣在船上）；`Parch`代表父母或子女的人數（且他們同樣在船上）
+#### 4-1. 請使用mutate()，幫我建立一個新的欄位`Family`，代表`SibSp + Parch`的人數。
+```{r Prac11Quiz2, exercise = TRUE, exercise.lines = 15, exercise.eval = TRUE, message  = FALSE}
+#1
+
+#2
+
+#3
+
+#4
+
+```
+
+```{r Prac11Quiz2-hint-1}
+#1
+NumberofMissing <- function(x){
+  TrueFalse <- is.na(x)
+  number_of_missing <- sum(TrueFalse)
+  return(number_of_missing)
+}
+#2
+titanic %>%
+  group_by(Sex) %>%
+  summarise(年齡的遺失值數 = NumberofMissing(Age),
+            社會階級的遺失值數 = NumberofMissing(Fare)        )
+#3
+totalnumber <- nrow(titanic)
+titanic %>%
+  group_by(Sex, Pclass) %>%
+  summarise(存活率 = sum(Survived, na.rm = T)/totalnumber)
+
+#4
+titanic %>%
+  mutate(Family = SibSp + Parch) -> titanic
+
+```
+
+---
+
+> Question 3
+
+#### 1. 請建立一個新的list，命名為`titanic_list`，用來儲存四個元素：`titanic$Age`、`titanic$Fare`、`titanic$SibSp`、`titanic$Parch`。（註：不需要對四個元素取名）
+#### 2. 請寫一個function，命名為MaxMinMean，用來計算出某變數的最大值、最小值和平均值，並一次return這三個值。（提示：請將輸出結果寫成一個list，才能一次輸出三個結果）
+#### 3. 承上題，請使用`map()`，計算`titanic_list`內的所有元素之最大值、最小值和平均值
+```{r Prac11Quiz3, exercise = TRUE, exercise.lines = 15, exercise.eval = TRUE, message  = FALSE}
+#1
+
+#2
+
+#3
+library(purrr)
+
+
+```
+
+```{r Prac11Quiz3-hint-1}
+#1
+titanic_list <- list(titanic$Age, titanic$Fare, titanic$SibSp, titanic$Parch)
+#2
+MaxMinMean <- function(x){
+  Max <- max(x, na.rm = T)
+  Min <- min(x, na.rm = T)
+  Mean <- mean(x, na.rm = T)
+  result <- list(最大值 = Max, 最小值 = Min, 平均值 = Mean)
+  return(result)
+}
+#3
+library(purrr)
+map(seq_along(titanic_list), function(i) MaxMinMean(titanic_list[[i]]))
+
+
+```
